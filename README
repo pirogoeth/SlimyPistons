@@ -1,0 +1,13 @@
+SlimyPistons
+
+Allows you to changes regular pistons in Minecraft to sticky pistons
+by right-clicking with a slimeball and back the opposite direction
+with a piece of paper.
+
+TODO:
+ - Permissions
+     : Planned Nodes - 
+         slimypistons.target.sticky
+         slimypistons.target.normal
+         slimypistons.get.paper
+         slimypistons.get.slimeball
