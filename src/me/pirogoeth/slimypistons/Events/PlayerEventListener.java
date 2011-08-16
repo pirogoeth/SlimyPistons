@@ -13,13 +13,16 @@ import org.bukkit.ChatColor;
 import java.util.logging.Logger;
 
 import me.pirogoeth.slimypistons.SlimyPistons;
+import me.pirogoeth.slimypistons.Util.Permission;
 
 public class PlayerEventListener extends PlayerListener {
     public static SlimyPistons plugin;
+    public Permission permissions;
     Logger log = Logger.getLogger("Minecraft");
     public PlayerEventListener (SlimyPistons instance)
     {
         plugin = instance;
+        permissions = plugin.permissions;
     }
     public void onPlayerInteract (PlayerInteractEvent event)
     {
@@ -36,7 +39,8 @@ public class PlayerEventListener extends PlayerListener {
          */
         Player player = event.getPlayer();
         Block clicked_b = event.getClickedBlock();
-        if (clicked_b.getTypeId() == 33)
+        if (clicked_b == null) { return; }; // this is to prevent NullPointerExceptions from spewing everywhere.
+        if (clicked_b.getTypeId() == 33 && permissions.has(player, "slimypistons.target.sticky"))
         {
             // this is the block we're watching for
             ItemStack player_h = player.getItemInHand();
@@ -48,7 +52,7 @@ public class PlayerEventListener extends PlayerListener {
                 clicked_b.setData((Byte) rx_dat, true);
             }
         }
-        else if (clicked_b.getTypeId() == 29)
+        else if (clicked_b.getTypeId() == 29 && permissions.has(player, "slimypistons.target.normal"))
         {
             // this is a sticky piston.
             ItemStack player_h = player.getItemInHand();
